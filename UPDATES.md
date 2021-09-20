@@ -12,3 +12,12 @@ For now, frequency of the updates is QUATERLY. And the processing is triggered m
 * 02-monthly-to-aggregated-COUNTRY-BASIN.ipynb
 * 03-monthly-to-aggregated-GADM.ipynb
 * 04-generate-variances.ipynb
+
+## Notes
+
+* During updates, some of the reservoirs (~200 out of 70000) have zero time steps, probably due to missing images. A better monitoring is needed for them, to ensure the whole time series is updated during next revisit.
+
+* The first version of the script (update-reservoir-water-area-time-series.py) fetches time series from EE using sync requests, this results in some OOM issues for a fraction of reservoirs (1%). This does not happen when using tasks so we need to migrate to tasks when in production, or improve the algorithm.
+
+
+

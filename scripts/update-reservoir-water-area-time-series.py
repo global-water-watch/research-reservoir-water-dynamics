@@ -1,3 +1,14 @@
+"""
+Updates global reservoirs surface water area datasets (incremental).
+
+Uses GS bucket to store results.
+
+TODO: move to python package
+TODO: merge with merge_time_series.py and get_missing_ids.py as commands (Click?)
+TODO: integrate into some Cloud-based workflow
+
+"""
+
 import json
 import sys
 import os
@@ -22,7 +33,6 @@ EXPORT_TIME_STOP = '2021-10-01'
 
 # missing_only=True
 missing_only=False
-
 
 
 
