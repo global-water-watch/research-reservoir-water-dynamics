@@ -21,3 +21,12 @@ For now, frequency of the updates is QUATERLY. And the processing is triggered m
 
 * Probably give-up csv and use parquet instead (but csv is still used in EE app)
 
+
+## Next release
+
+* Extend this readme to end September to include:
+     Note about automated updates
+     Sentinel-1 (comparison)
+     Short presentation of the products
+
+* Update financial planning
