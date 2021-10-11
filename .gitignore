@@ -129,4 +129,6 @@ dmypy.json
 .pyre/
 
 data/reservoir-time-series*
+data/shp*
 keys/*.json
+

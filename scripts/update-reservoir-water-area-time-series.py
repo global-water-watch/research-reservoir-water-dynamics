@@ -127,12 +127,30 @@ def update_time_series(waterbody, use_task):
 
     bucket.blob(gs_path).upload_from_string(df.to_csv(index=False), 'text/csv')
 
+
+def get_number_of_running_tasks():
+  statuses = ee.data.getTaskList()
+  return len([s['state'] for s in statuses if s['state'] == 'READY' or s['state'] == 'RUNNING'])
+
+def wait_for_running_tasks_to_complete():
+  '''
+  Watit until number of running tasks < 500
+  '''
+
+  n_running_tasks = get_number_of_running_tasks()
+
+  while n_running_tasks > 500:
+    time.sleep(600) # 10 min
+    n_running_tasks = get_number_of_running_tasks()
+
+
 count = waterbodies.size().getInfo()
 
 start = 0
 offset = 0
 t_start = time.time()
 retry_count = 0
+use_task = True # use task or download directly
 
 missing_ids = []
 
@@ -140,11 +158,16 @@ if missing_only:
     missing_ids = pd.read_csv('missing.csv').missing.values
 
 waterbody_ids = waterbodies.aggregate_array('fid').getInfo()
- 
+
 while offset < count - 1:
   try:
     progress = tqdm(range(start, count), initial=start)
     for offset in progress:
+      
+      # every 500 tasks check if we need to wait before other tasks complete before starting new ones
+      if offset % 500 == 0:
+        wait_for_running_tasks_to_complete()
+
       waterbody_id = waterbody_ids[offset]
 
       if missing_only:
@@ -166,19 +189,21 @@ while offset < count - 1:
 
         progress.set_description(f'Downloading {waterbody_id}')
     
-        update_time_series(waterbody, use_task=False)
-    
-        t_end = time.time()
-        t_elapsed = str(t_end - t_start)
+        update_time_series(waterbody, use_task=True)
 
-        meta = { 'elapsed': t_elapsed, 'retry_count': retry_count }
+        # update_time_series(waterbody, use_task=False)
+        #
+        # t_end = time.time()
+        # t_elapsed = str(t_end - t_start)
+        # 
+        # meta = { 'elapsed': t_elapsed, 'retry_count': retry_count }
+        # 
+        # id_str = ee.Number(waterbody_id).format('%07d').getInfo().zfill(5)
+        # 
+        # filename = id_str + '.meta.json'
+        # bucket.blob(f'{GS_OUTPUT_DIR}/{filename}').upload_from_string(json.dumps(meta), 'text/json')
 
-        id_str = ee.Number(waterbody_id).format('%07d').getInfo().zfill(5)
-
-        filename = id_str + '.meta.json'
-        bucket.blob(f'{GS_OUTPUT_DIR}/{filename}').upload_from_string(json.dumps(meta), 'text/json')
-
-        t_start = time.time()
+        # t_start = time.time()
   except Exception as e:
     retry_count = retry_count + 1
     retry_max = 30
