@@ -18,14 +18,17 @@ def is_non_zero_file(fpath):
 DEBUG = False
 # DEBUG = True
 
+OLD_UPDATE_DIR = 'reservoir-time-series-2021-Q2'
+NEW_UPDATE_DIR = 'reservoir-time-series-2021-Q3'
+
 # previous time series (full time range, 1985-20XX)
-PATH_TIME_SERIES_IN = '../data/reservoir-time-series-2021-Q1/time_series_area_raw/'
+PATH_TIME_SERIES_IN = f'../data/{OLD_UPDATE_DIR}/time_series_area_raw/'
 
 # new update (small increments)
-PATH_TIME_SERIES_IN_UPDATE = '../data/reservoir-time-series-2021-Q2/time_series_area_raw_update'
+PATH_TIME_SERIES_IN_UPDATE = f'../data/{NEW_UPDATE_DIR}/time_series_area_raw_update'
 
 # path to store merged time series
-PATH_TIME_SERIES_OUT = '../data/reservoir-time-series-2021-Q2/time_series_area_raw'
+PATH_TIME_SERIES_OUT = f'../data/{NEW_UPDATE_DIR}/time_series_area_raw'
 
 # create destination dir
 pathlib.Path(PATH_TIME_SERIES_OUT).mkdir(exist_ok=True)
