@@ -1,4 +1,4 @@
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 import geopandas as gpd
 import pandas as pd
 from glob import glob
@@ -69,3 +69,4 @@ for gadm_level in tqdm(gadm_levels):
 
     for gadm_id in tqdm(gadm2_areas):
         compute_aggreated_timeseries(gadm_id, gadm_level, out_dir_by_gadm)
+

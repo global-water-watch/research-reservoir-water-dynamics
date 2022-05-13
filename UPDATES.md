@@ -16,7 +16,7 @@ Go to scripts/ directory and run:
      * OLD_UPDATE_DIR - this is a previous update (full time series) 
      * NEW_UPDATE_DIR - target directory for merged dataset
 
-* 03_daily_to_monthly.py, runtime: ~8.5 hours
+* 03_daily_to_monthly.py, runtime: ~9 hours
   * Parameters to change before run:
      * DIR_DATA
 
@@ -29,6 +29,18 @@ Go to scripts/ directory and run:
      * DIR_DATA
 
 Move the output directory to gs://global-water-watch/
+
+## Time to run processing
+
+The runtime is measured given the current set of optical Landsat and Sentinel satellite images available in Google Earth Engine (as of Sep 2021) and running processing for three months and ~72 000 reservoirs globally. Post-processing tasks (02-05) are measured on a laptop with an i7 9750H CPU.
+
+| Step                                  | Runtime        |
+|---------------------------------------|----------------|
+| 01_update_water_area_time_series.py   | 12 days        |
+| 02_merge_time_series.py               | 1.5 hours      |
+| 03_daily_to_monthly.py, runtime       | 14 hours       |
+| 04_aggregate_monthly_COUNTRY_BASIN.py | a few minutes  |
+| 05_aggregate_monthly_GADM.py          | a few minutes  |
 
 ## Notes
 

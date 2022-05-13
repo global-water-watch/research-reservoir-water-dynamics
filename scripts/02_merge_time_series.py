@@ -18,8 +18,8 @@ def is_non_zero_file(fpath):
 DEBUG = False
 # DEBUG = True
 
-OLD_UPDATE_DIR = 'reservoir-time-series-2021-Q2'
-NEW_UPDATE_DIR = 'reservoir-time-series-2021-Q3'
+OLD_UPDATE_DIR = 'reservoir-time-series-2021-Q3'
+NEW_UPDATE_DIR = 'reservoir-time-series-2022-Q2'
 
 # previous time series (full time range, 1985-20XX)
 PATH_TIME_SERIES_IN = f'../data/{OLD_UPDATE_DIR}/time_series_area_raw/'
@@ -33,7 +33,12 @@ PATH_TIME_SERIES_OUT = f'../data/{NEW_UPDATE_DIR}/time_series_area_raw'
 # create destination dir
 pathlib.Path(PATH_TIME_SERIES_OUT).mkdir(exist_ok=True)
 
-files_ts_in = list(pathlib.Path(PATH_TIME_SERIES_IN).glob('*.csv'))
+files_ts_in = []
+
+for f in pathlib.Path(PATH_TIME_SERIES_IN_UPDATE).glob('*.csv'):
+    files_ts_in.append(pathlib.Path(PATH_TIME_SERIES_IN) / f.name)
+
+print(len(files_ts_in))
 
 progress = tqdm(files_ts_in)
 for path in progress:

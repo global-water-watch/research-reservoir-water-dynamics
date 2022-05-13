@@ -13,7 +13,7 @@ from ipywidgets import interact, interact_manual
 import dateutil.parser
 from tqdm import tqdm
 
-DIR_DATA = '../data/reservoir-time-series-2021-Q3'
+DIR_DATA = '../data/reservoir-time-series-2021-Q4-all'
 
 # input
 DIR_EO = f'{DIR_DATA}/time_series_area_raw/'
@@ -27,7 +27,6 @@ pathlib.Path(DIR_EO_SMALL).mkdir(exist_ok=True)
 
 reservoirs_by_filenames = list(pathlib.Path(DIR_EO).glob('*.csv'))
 
-
 def get_data(filename):
     df = pd.read_csv(filename)
 
@@ -36,11 +35,11 @@ def get_data(filename):
     })
 
     df['time_ms'] = df.time
-
     df.time = pd.to_datetime(df.time, unit='ms')
     df = df.set_index('time')
 
-    df = df[df.water_area_filled_fraction < 0.4]
+    df = df[df.water_area_filled_fraction < 0.3]
+    df = df[df.quality_score < 0.3]
 
     return df
 
@@ -56,60 +55,6 @@ def remove_large_gradients(df, th):
     return df
 
 
-def clean_data_v1(df_eo):
-    df_eo['area'] = df_eo.water_area_filled
-
-    # round to days
-    df_eo.index = df_eo.index.round('D')
-
-#     df_eo = remove_large_gradients(df_eo, 75)
-#     df_eo = remove_large_gradients(df_eo, 90)
-
-#     df_eo = remove_large_gradients(df_eo, 85)
-#     df_eo = remove_large_gradients(df_eo, 85)
-
-    df_eo = remove_large_gradients(df_eo, 90)
-    df_eo = remove_large_gradients(df_eo, 99)
-
-    # take top 90% (eliminate underfilling due to lower trust in water occurrence)
-#     df_eo = df_eo.resample('M').max()
-    df_eo = df_eo.resample('M').apply(lambda x: x.quantile(0.98))
-
-    if len(df_eo) == 0:
-        return df_eo
-
-    # smoothen using akima
-    df_eo = df_eo.interpolate(method='akima')
-#     df_eo = df_eo.interpolate(method='barycentric')
-    df_eo = df_eo.shift(-1)
-
-
-#     df2 = df2.sort_index()
-#     z = sm.nonparametric.lowess(df2.water_area_filled, df2.time_ms, return_sorted=False, frac=1/200)
-#     df2['z'] = z
-#     ax.plot(df2.index, df2.z, 'g-')
-
-#     df3 = df2.resample('W').max().interpolate(method='polynomial', order=2)
-#     df3 = df3.ewm(span = 3).mean()
-
-
-#     df3 = df3.resample('3W').mean()
-
-#     df3 = df3.shift(-1)
-#     df3 = df2.resample('W').max().interpolate(method='linear')
-#     df2 = df2.resample('D').interpolate(method='polynomial', order=2)
-#     df2 = df2.resample('D').interpolate(method='akima')
-
-#     df4 = df3.sort_index()
-#     z = sm.nonparametric.lowess(df4.water_area_filled, df4.time_ms, return_sorted=False, frac=1/100)
-#     df4['z'] = z
-#     ax.plot(df4.index, df4.z, 'b-')
-
-#     ax.plot(df2.index, df2.water_area_filled, 'b-')
-
-    return df_eo
-
-
 def clean_data(df_eo, step='M', skip_missings=True, min_missings_step=12):
     d = df_eo
     d['area'] = d.water_area_filled
@@ -118,8 +63,8 @@ def clean_data(df_eo, step='M', skip_missings=True, min_missings_step=12):
     # round to days
     d.index = d.index.round('D')
 
-#     d = remove_large_gradients(d, 90)
-#     d = remove_large_gradients(d, 99)
+    d = remove_large_gradients(d, 90)
+    d = remove_large_gradients(d, 99)
 
     # take top 90% (eliminate underfilling due to lower trust in water occurrence)
     d = d.resample(step).apply(lambda x: x.quantile(0.90))
@@ -145,7 +90,7 @@ def clean_data(df_eo, step='M', skip_missings=True, min_missings_step=12):
 # export all
 
 
-start_index = 0
+start_index = 30441
 
 for f in tqdm(list(reservoirs_by_filenames)[start_index:]):
     df = get_data(f)

@@ -3,30 +3,25 @@ from glob import glob
 import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 
 DIR_DATA = '../data/reservoir-time-series-2021-Q3'
 
-out_dir_monthly_timeseries_by_country = pathlib.Path(
-    f'{DIR_DATA}/time_series_area_by_country/')
+out_dir_monthly_timeseries_by_country = pathlib.Path(f'{DIR_DATA}/time_series_area_by_country/')
 out_dir_monthly_timeseries_by_country.mkdir(exist_ok=True)
 
-out_dir_monthly_timeseries_by_basin = pathlib.Path(
-    f'{DIR_DATA}/time_series_area_by_basin/')
+out_dir_monthly_timeseries_by_basin = pathlib.Path(f'{DIR_DATA}/time_series_area_by_basin/')
 out_dir_monthly_timeseries_by_basin.mkdir(exist_ok=True)
 
 dir_monthly_timeseries = f'{DIR_DATA}/time_series_area_monthly/'
 
-reservoirs_and_country_basin = gpd.read_file(
-    f'{DIR_DATA}/../shp/extra/reservoirs-v1.0-and-countries-basins.shp')
+reservoirs_and_country_basin = gpd.read_file(f'{DIR_DATA}/../shp/extra/reservoirs-v1.0-and-countries-basins.shp')
 
 reservoirs_and_country_basin.fillna(value=-9999, inplace=True)
-reservoirs_and_country_basin = reservoirs_and_country_basin[
-    reservoirs_and_country_basin.basin_id != -9999]
+reservoirs_and_country_basin = reservoirs_and_country_basin[reservoirs_and_country_basin.basin_id != -9999]
 
 reservoirs_and_country_basin.fid = reservoirs_and_country_basin.fid.astype(int)
-reservoirs_and_country_basin.basin_id = reservoirs_and_country_basin.basin_id.astype(
-    int)
+reservoirs_and_country_basin.basin_id = reservoirs_and_country_basin.basin_id.astype(int)
 
 def read_time_series(path):
     df = pd.read_csv(path)
