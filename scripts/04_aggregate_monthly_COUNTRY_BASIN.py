@@ -5,7 +5,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-DIR_DATA = '../data/reservoir-time-series-2021-Q3'
+DIR_DATA = '../data/reservoir-time-series-2022-Q2'
 
 out_dir_monthly_timeseries_by_country = pathlib.Path(f'{DIR_DATA}/time_series_area_by_country/')
 out_dir_monthly_timeseries_by_country.mkdir(exist_ok=True)

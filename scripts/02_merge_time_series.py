@@ -18,7 +18,7 @@ def is_non_zero_file(fpath):
 DEBUG = False
 # DEBUG = True
 
-OLD_UPDATE_DIR = 'reservoir-time-series-2021-Q3'
+OLD_UPDATE_DIR = 'reservoir-time-series-2021-Q4-all'
 NEW_UPDATE_DIR = 'reservoir-time-series-2022-Q2'
 
 # previous time series (full time range, 1985-20XX)
@@ -42,6 +42,10 @@ print(len(files_ts_in))
 
 progress = tqdm(files_ts_in)
 for path in progress:
+    if not is_non_zero_file(path):
+        progress.set_description(f'Skipping empty: {path.name}')
+        continue
+
     df_old = pd.read_csv(path)
     
     path_new = pathlib.Path(PATH_TIME_SERIES_IN_UPDATE) / path.name

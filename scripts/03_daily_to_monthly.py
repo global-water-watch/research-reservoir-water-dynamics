@@ -13,7 +13,7 @@ from ipywidgets import interact, interact_manual
 import dateutil.parser
 from tqdm import tqdm
 
-DIR_DATA = '../data/reservoir-time-series-2021-Q4-all'
+DIR_DATA = '../data/reservoir-time-series-2022-Q2'
 
 # input
 DIR_EO = f'{DIR_DATA}/time_series_area_raw/'
@@ -40,6 +40,7 @@ def get_data(filename):
 
     df = df[df.water_area_filled_fraction < 0.3]
     df = df[df.quality_score < 0.3]
+    df = df[df.water_area_p < 0.99]
 
     return df
 
@@ -55,19 +56,21 @@ def remove_large_gradients(df, th):
     return df
 
 
-def clean_data(df_eo, step='M', skip_missings=True, min_missings_step=12):
+def clean_data(df_eo, step='MS', skip_missings=True, min_missings_step=12):
     d = df_eo
     d['area'] = d.water_area_filled
+    
     d = d[['area']]
 
     # round to days
     d.index = d.index.round('D')
 
-    d = remove_large_gradients(d, 90)
+    # d = remove_large_gradients(d, 90)
     d = remove_large_gradients(d, 99)
-
-    # take top 90% (eliminate underfilling due to lower trust in water occurrence)
-    d = d.resample(step).apply(lambda x: x.quantile(0.90))
+    
+    d = d.rolling(3, min_periods=3, center=True).apply(lambda x: x.quantile(0.5))
+    d = d.resample(step).apply(lambda x: x.mean())
+     
 
     # create mask
     if skip_missings:
@@ -78,7 +81,9 @@ def clean_data(df_eo, step='M', skip_missings=True, min_missings_step=12):
             'count') < min_missings_step) | d['area'].notnull()
 
     # smoothen
-    d = d.interpolate(method='pchip')
+    if len(d.dropna()) > 1:
+        d = d.interpolate(method='pchip')
+    
     # d = d.shift(-1)
 
     # apply missing values mask (>6 months)
@@ -90,7 +95,7 @@ def clean_data(df_eo, step='M', skip_missings=True, min_missings_step=12):
 # export all
 
 
-start_index = 30441
+start_index = 0
 
 for f in tqdm(list(reservoirs_by_filenames)[start_index:]):
     df = get_data(f)

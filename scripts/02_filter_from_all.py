@@ -43,6 +43,10 @@ for path in progress:
     except:
         continue # skip empty files
 
+    if len(df) == 0:
+        df.to_csv(df, index=False)
+        continue
+
     # lookup cloud frequency and filter out noise
     fid = int(path.stem)
     cloud_frequency = fid2cloud[fid]

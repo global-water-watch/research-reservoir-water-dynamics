@@ -6,7 +6,7 @@ import pathlib
 import matplotlib.pyplot as plt
 from joblib import Parallel, delayed
 
-DIR_DATA = '../data/reservoir-time-series-2021-Q3'
+DIR_DATA = '../data/reservoir-time-series-2022-Q2'
 
 out_dir_monthly_timeseries_by_gadm2 = pathlib.Path(
     f'{DIR_DATA}/time_series_area_by_gadm2/')
