@@ -1,4 +1,10 @@
-Reconstruction of surface water dynamics in global reservoirs. Access to Global Water Watch code snippets, including JavaScript source code of the algorithm, in Google Earth Engine Code Editor:
+Reconstruction of surface water dynamics in global reservoirs.
+
+This research is a part of the Global Water Watch platform https://globalwaterwatch.earth/
+
+![image](https://user-images.githubusercontent.com/169821/180023671-e6e3ab68-c87e-40a6-ad99-5500e8fef81a.png)
+
+To access code snippets, including JavaScript source code of the algorithm, in Google Earth Engine Code Editor:
 
 * https://code.earthengine.google.com/?accept_repo=users/gena/global-water-watch-paper-area
 
