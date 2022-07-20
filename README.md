@@ -8,5 +8,7 @@ Prototype Google Earth Engine App:
 
 ![image](https://user-images.githubusercontent.com/169821/173349993-94241e2d-585d-4fd9-957e-87cb6e07ce42.png)
 
+Validation Google Earth Engine App:
 
+* http://gena.users.earthengine.app/view/water-watch-validation
 
