@@ -12,3 +12,6 @@ Validation Google Earth Engine App:
 
 * http://gena.users.earthengine.app/view/water-watch-validation
 
+![image](https://user-images.githubusercontent.com/169821/180023268-150c42a9-9bc5-428f-b00b-a0e8402e75d2.png)
+
+
