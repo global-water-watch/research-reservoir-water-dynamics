@@ -1,0 +1,1 @@
+A clone of the GEE repository: https://code.earthengine.google.com/?accept_repo=users/gena/global-water-watch-paper-area

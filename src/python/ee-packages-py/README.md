@@ -1,0 +1,1 @@
+Python version of the source code can be found here: https://github.com/gee-community/ee-packages-py/blob/main/eepackages/applications/waterbody_area.py
