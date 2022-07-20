@@ -16,6 +16,6 @@ Validation Google Earth Engine App:
 
 ![image](https://user-images.githubusercontent.com/169821/180023268-150c42a9-9bc5-428f-b00b-a0e8402e75d2.png)
 
-This research is a part of the Global Water Watch platform, for more information visit: https://globalwaterwatch.earth/.
+This research is a part of the Global Water Watch platform and partnership, for more information visit: https://globalwaterwatch.earth/.
 
 ![image](https://user-images.githubusercontent.com/169821/180023671-e6e3ab68-c87e-40a6-ad99-5500e8fef81a.png)
