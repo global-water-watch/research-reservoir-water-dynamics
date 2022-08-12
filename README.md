@@ -6,7 +6,7 @@ Paper: https://doi.org/10.1038/S41598-022-17074-6
 
 Supplementary materials include data files published with the paper (~5GB): https://doi.org/10.6084/m9.figshare.20359860
 
-To access code snippets, including JavaScript source code of the algorithm, in Google Earth Engine Code Editor:
+To access Google Earth Engine code snippets, including JavaScript source code of the algorithm:
 
 * https://code.earthengine.google.com/?accept_repo=users/gena/global-water-watch-paper-area
 
