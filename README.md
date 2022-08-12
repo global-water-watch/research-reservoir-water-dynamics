@@ -2,7 +2,7 @@ High-resolution surface water dynamics in Earth’s small and medium-sized reser
 
 Paper: https://doi.org/10.1038/S41598-022-17074-6
 
-![image](https://user-images.githubusercontent.com/169821/184420138-2d6815e7-4760-4637-9f93-e1beff14fe5e.png)
+[![image](https://user-images.githubusercontent.com/169821/184420138-2d6815e7-4760-4637-9f93-e1beff14fe5e.png)](https://doi.org/10.1038/S41598-022-17074-6)
 
 Supplementary Materials: https://doi.org/10.6084/m9.figshare.20359860
 
