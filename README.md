@@ -1,4 +1,4 @@
-This repository includes algorithms and scripts used in the ["High-resolution surface water dynamics in Earth’s small and medium-sized reservoirs"] (https://doi.org/10.1038/S41598-022-17074-6) research paper.
+This repository includes algorithms and scripts used in the ["High-resolution surface water dynamics in Earth’s small and medium-sized reservoirs"](https://doi.org/10.1038/S41598-022-17074-6) research paper.
 
 [![image](https://user-images.githubusercontent.com/169821/184420138-2d6815e7-4760-4637-9f93-e1beff14fe5e.png)](https://doi.org/10.1038/S41598-022-17074-6)
 
