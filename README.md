@@ -4,7 +4,7 @@ Paper: https://doi.org/10.1038/S41598-022-17074-6
 
 [![image](https://user-images.githubusercontent.com/169821/184420138-2d6815e7-4760-4637-9f93-e1beff14fe5e.png)](https://doi.org/10.1038/S41598-022-17074-6)
 
-Supplementary Materials: https://doi.org/10.6084/m9.figshare.20359860
+Supplementary materials include data files published with the paper (~5GB): https://doi.org/10.6084/m9.figshare.20359860
 
 To access code snippets, including JavaScript source code of the algorithm, in Google Earth Engine Code Editor:
 
