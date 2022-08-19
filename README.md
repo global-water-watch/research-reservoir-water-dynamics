@@ -9,3 +9,8 @@ Reconstruction of surface water dynamics in global reservoirs
 # Access to Global Water Watch code snippets in Google Earth Engine 
 * https://code.earthengine.google.com/?accept_repo=users/gena/global-water-watch
 
+# Run with docker image
+```
+docker build . -t rrwd
+docker run -p 8888:8888 -v ~/.config:/home/jovyan/.config -v $(pwd)/home/jovyan/work rrwd
+```
