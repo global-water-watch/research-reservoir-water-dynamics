@@ -1,0 +1,24 @@
+name: research-reservoir-water-dynamics
+channels:
+  - conda-forge
+  - pyviz
+dependencies:
+  - bottleneck
+  - cartopy
+  - earthengine-api
+  - fiona
+  - google-cloud-storage
+  - geoviews
+  - geemap
+  - h5netcdf
+  - hvplot
+  - jupyterlab
+  - matplotlib
+  - netCDF4=1.5.8
+  - pandas=1.3.*
+  - pip
+  - pyproj
+  - rasterio
+  - rioxarray
+  - shapely>=1.8
+  - scikit-image
